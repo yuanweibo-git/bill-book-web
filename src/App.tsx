@@ -3,7 +3,12 @@ import React, { useState, useEffect } from 'react';
 function App() {
   const [data, setData] = useState([1, 2, 3, 4, 5]);
 
-  useEffect(() => {});
+  useEffect(() => {
+    data.map((item) => {
+      console.log(item);
+    });
+  });
+
   return (
     <div className="App">
       {data.map((item, index) => (
