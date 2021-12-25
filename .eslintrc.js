@@ -19,6 +19,7 @@ module.exports = {
   plugins: ['react', 'prettier', '@typescript-eslint'],
   rules: {
     semi: ['error', 'always'],
+    '@typescript-eslint/no-explicit-any': 'off', // 允许any类型
     'react/self-closing-comp': ['error'],
     'prettier/prettier': 2,
   },
