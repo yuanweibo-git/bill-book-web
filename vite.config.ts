@@ -10,6 +10,19 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src'),
     },
   },
+
+  css: {
+    modules: {
+      localsConvention: 'dashesOnly',
+    },
+    preprocessorOptions: {
+      less: {
+        // 支持内联 JavaScript
+        javascriptEnabled: true,
+      },
+    },
+  },
+
   plugins: [
     react(),
     styleimport({
