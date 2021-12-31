@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import routes from './router';
+import NavBar from '@/components/NavBar';
 
 import { ConfigProvider } from 'zarm';
 
@@ -14,6 +15,7 @@ function App() {
           ))}
         </Routes>
       </ConfigProvider>
+      <NavBar visible={true} />
     </Router>
   );
 }
