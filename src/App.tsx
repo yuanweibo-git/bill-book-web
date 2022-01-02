@@ -1,22 +1,35 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+
+import { ConfigProvider } from 'zarm';
+import 'lib-flexible/flexible';
+import './index.css';
+
 import routes from './router';
 import NavBar from '@/components/NavBar';
 
-import { ConfigProvider } from 'zarm';
-
 function App() {
+  const pathname: string = useLocation().pathname;
+  const showTabBar = ['/', '/data', '/user'];
+  const [showNav, setShowNav] = useState(false);
+
+  useEffect(() => {
+    setShowNav(showTabBar.includes(pathname));
+  }, [pathname]);
+
   return (
-    <Router>
+    <>
       <ConfigProvider primaryColor={'#007fff'}>
         <Routes>
           {routes.map((route) => (
             <Route key={route.path} path={route.path} element={<route.component />} />
           ))}
+          <Route path="*" element={<Navigate to="/404" />} />
         </Routes>
       </ConfigProvider>
-      <NavBar visible={true} />
-    </Router>
+      <NavBar visible={showNav} />
+    </>
   );
 }
 
