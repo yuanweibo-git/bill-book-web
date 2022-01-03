@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { TabBar } from 'zarm';
 import { useNavigate } from 'react-router-dom';
 import style from './style.module.less';
-import './index.less';
 
 import CustomIcon from '@/components/CustomIcon';
 

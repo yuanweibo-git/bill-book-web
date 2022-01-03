@@ -9,6 +9,15 @@ import './index.css';
 import routes from './router';
 import NavBar from '@/components/NavBar';
 
+function getAuthRoute(route: any) {
+  const token = localStorage.getItem('token');
+  if (!token && route.auth) {
+    return <Navigate to="/login" />;
+  }
+
+  return <route.component />;
+}
+
 function App() {
   const pathname: string = useLocation().pathname;
   const showTabBar = ['/', '/data', '/user'];
@@ -23,7 +32,7 @@ function App() {
       <ConfigProvider primaryColor={'#007fff'}>
         <Routes>
           {routes.map((route) => (
-            <Route key={route.path} path={route.path} element={<route.component />} />
+            <Route key={route.path} path={route.path} element={getAuthRoute(route)} />
           ))}
           <Route path="*" element={<Navigate to="/404" />} />
         </Routes>

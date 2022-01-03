@@ -6,6 +6,7 @@ import { AxiosResponse } from 'axios';
 
 const server = axios.create({
   baseURL: '/api',
+  timeout: 5000,
   headers: {
     'X-Requested-With': 'XMLHttpRequest',
     Authorization: `${localStorage.getItem('token') || null}`,
@@ -23,7 +24,7 @@ server.interceptors.request.use(
 );
 
 server.interceptors.response.use(
-  (response: AxiosResponse<ResData>) => {
+  (response: AxiosResponse<ResData>): ResData => {
     if (response.data.code !== 200) {
       Toast.show(response.data.msg);
 
@@ -36,6 +37,9 @@ server.interceptors.response.use(
   },
 
   (error) => {
+    if (error.message.includes('timeout')) {
+      Toast.show('网络超时，请稍后再试！');
+    }
     return Promise.reject(error);
   }
 );
